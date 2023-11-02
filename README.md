@@ -13,8 +13,8 @@ The package provides a class for working with Egyptological transliteration/tran
 To create an `UmschString` object you can use one of the following methods:
 - `from_unicode` loads Unicode-formatted strings
 - `from_umschrift_ttn` loads strings formatted with Umschrift_TTn v3.0 font (https://wwwuser.gwdg.de/~lingaeg/lingaeg-stylesheet.htm)
-- `from_trlit_cg_times` loads strings formatted with the 2023 version of the Trlit_CG Times font (https://dmd.wepwawet.nl/fonts.htm https://oeb.griffith.ox.ac.uk/fonts.aspx)
-- `from_trlit_cg_times_2023` loads strings formatted with the pre-2023 version of the Trlit_CG Times font
+- `from_trlit_cg_times_2023` loads strings formatted with the 2023 version of the Trlit_CG Times font (https://dmd.wepwawet.nl/fonts.htm https://oeb.griffith.ox.ac.uk/fonts.aspx)
+- `from_trlit_cg_times` loads strings formatted with the pre-2023 version of the Trlit_CG Times font
 - `from_transliteration` loads strings formatted with Transliteration font (CCER), downloadable from the link above
 
 The `UmschString` objects have export methods for outputting strings and support some of the Python string methods (`upper`, `lower`, `index`, `find`, `replace`, `endswith`, `startswith`)
