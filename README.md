@@ -42,6 +42,8 @@ Flags can be combined using the bitwise OR `|` operator
 ```python
 from umschriftpy import *
 
+#       CONVERSION
+
 # imports a Trlit_CG Times string
 uma = from_trlit_cg_times(
     "Htp dj nsw Wp-WAwt nb tA Dsr dj=f prt-xrw (m) t Hnqt")
@@ -53,6 +55,8 @@ print(uma_replaced.to_unicode())  # exports to Unicode
 # exports to Unicode with a special option (ḳ instead of q)
 print(uma_replaced.to_unicode(UmExport.K_WITH_DOT))
 # >>> ḥtp dꞽ nꞽswt wp-wꜣwt nb tꜣ ḏsr dꞽ⸗f prt-ḫrw (m) t ḥnḳt
+
+#       CLEANING UP STRINGS FOR COMPARISON
 
 a = from_umschrift_ttn("O#.tj-o-jj#")  # imports an Umschrift_TTn string
 print(a.to_unicode())
@@ -70,6 +74,8 @@ print(a_filtered == b_filtered)  # filtered strings are now equal
 # >>> True
 print(a_filtered.to_unicode())
 # >>> ḥꜣtꞽ ꜥ yꜣ
+
+#       SORTING
 
 # inputting several names as a list
 name_list = [from_transliteration("nfr-Htp"), from_transliteration(
