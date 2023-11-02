@@ -18,20 +18,63 @@ In order to create an `UmschString` object you can use one of the folowing metho
 - `from_transliteration` loads strings formatted with Transliteration font (CCER), downloadable from the link above
 
 The `UmschString` object have export methods and support some of the Python string methods (`upper`, `lower`, `index`, `find`, `replace`, `endswith`, `startswith`)
+Data can be cleaned up using the `filter` method, with filtering options set by flags:
+`UmFilter.MORPH` removes morphological markers . : ·
+`UmFilter.SUFF_PRON` removes suffix pronoum separators ⸗
+`UmFilter.BRACKETS` removes brackets ⸢ ⸣ ⟨ ⟩ ( ) [ ] < > { } |
+`UmFilter.PUNCT` removes puntuation ? ! " , .
+`UmFilter.ALL` removes all of the above
+`UmFilter.DIGITS` removes all digits
+`UmFilter.FACULTATIVE` removes parentheses and all signs enclosed in parentheses
+`UmFilter.LOWER` converts all transliteration/transcription to lower case
+`UmFilter.HYPHENS` replaces all hypthens with spaces
+
 Data can be outputted to string using the `to_unicode` method. By default this method uses the Leiden Unified Transliteration/Transcription, however divergences can be set up by optional flags: 
-`K_WITH_DOT` uses ḳ and Ḳ for q and Q
-`J_FOR_YOD`  uses j and J for ꞽ and Ꞽ
-`JJ_FOR_DOUBLE_YOD`  uses jj and Jj for y and Y as well as for ï and Ï
-`SUPRESS_I_WITH_DIAERESIS`  uses y and Y for ï and Ï
+`UmExport.K_WITH_DOT` uses ḳ and Ḳ for q and Q
+`UmExport.J_FOR_YOD`  uses j and J for ꞽ and Ꞽ
+`UmExport.JJ_FOR_DOUBLE_YOD`  uses jj and Jj for y and Y as well as for ï and Ï
+`UmExport.SUPRESS_I_WITH_DIAERESIS`  uses y and Y for ï and Ï
 Flags can be combined using the bitwise OR `|` operator
 
-Example: 
-```
-uma = umschriftpy.from_trlit_cg_times("Htp dj nsw Wp-WAwt nb tA Dsr dj=f prt-xrw (m) t Hnqt")
-uma_lower = uma.lower()
-uma_replaced = umalower.replace(umschriftpy.from_trlit_cg_times("nsw"), umschriftpy.from_trlit_cg_times("njswt"))
-print(uma_replaced.to_unicode())
-print(uma_replaced.to_unicode(umschriftpy.ExportRules.K_WITH_DOT))
+Examples: 
+```python
+from umschriftpy import *
+
+uma = from_trlit_cg_times("Htp dj nsw Wp-WAwt nb tA Dsr dj=f prt-xrw (m) t Hnqt") # imports a Trlit_CG Times string 
+uma_lower = uma.lower() # converts it to lower cases
+uma_replaced = uma_lower.replace(from_trlit_cg_times("nsw"), from_trlit_cg_times("njswt")) # replaces a word
+print(uma_replaced.to_unicode()) # exports to Unicode
+# >>> ḥtp dꞽ nꞽswt wp-wꜣwt nb tꜣ ḏsr dꞽ⸗f prt-ḫrw (m) t ḥnqt
+print(uma_replaced.to_unicode(UmExport.K_WITH_DOT)) # exports to Unicode with a special option (ḳ instead of q)
+# >>> ḥtp dꞽ nꞽswt wp-wꜣwt nb tꜣ ḏsr dꞽ⸗f prt-ḫrw (m) t ḥnḳt
+
+a = from_umschrift_ttn("O#.tj-o-jj#") # imports an Umschrift_TTn string
+print(a.to_unicode())
+# >>> Ḥꜣ.tꞽ-ꜥ-yꜣ
+b = from_unicode("ḥꜣtꞽ ꜥ yꜣ") # imports an Unicode string
+print(b.to_unicode())
+# >>> ḥꜣtꞽ ꜥ yꜣ
+print(a == b) # the strings are different because of different punctuation, lowercase and uppercase letters
+# >>> False
+a_filtered = a.filter(UmFilter.ALL | UmFilter.HYPHENS | UmFilter.LOWER)
+b_filtered = b.filter(UmFilter.ALL | UmFilter.HYPHENS | UmFilter.LOWER) # filters strings
+print(a_filtered == b_filtered) # filtered strings are now equal
+# >>> True
+print(a_filtered.to_unicode())
+# >>> ḥꜣtꞽ ꜥ yꜣ
+
+name_list = [from_transliteration("nfr-Htp"), from_transliteration(
+    "aA-ptH"), from_transliteration("DHw.tj-nfr"), from_transliteration("Aw-jb")]
+# inputting several names as a list
+name_list_filtered = [item.filter(UmFilter.ALL | UmFilter.LOWER)
+                      for item in name_list]  # filters values
+# using a standard Python function to sort items
+name_list_sorted = sorted(name_list_filtered)
+# outputting the sorted list as Unicode
+print([item.to_unicode() for item in name_list_sorted])
+# >>> ['ꜣw-ꞽb', 'ꜥꜣ-ptḥ', 'nfr-ḥtp', 'ḏḥwtꞽ-nfr']
+
+
 
 ```
 
