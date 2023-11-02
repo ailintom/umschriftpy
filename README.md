@@ -2,36 +2,34 @@
 A Python library for dealing with Egyptological transliteration/transcription.
 
 ## Description
-This library is made for standardizing Egyptological transliteration/transcription with the aim of processing data stemming from digital project with different approaches to Egyptological transliteration/transcription.
-`umschriftpy` should be able to import Egyptological transliteration/transcription entered in different flavours of Unicode, as well as in conventional fonts Umschrift_TTn, Transliteration, and Trlit_CG Times and using different Egyptological conventions.
-One particultar application it was developed for is matching entries in across different databases.
-The Leiden Unified Transliteration/Transcription https://www.iae-egyptology.org/the-leiden-unified-transliteration serves as the basis for normalisation.
 
-It aims to be ported to other common programming languages used in the development of Egyptological applications. 
+This library is made for standardising Egyptological transliteration/transcription with the aim of processing data from digital projects with different approaches to Egyptological transliteration/transcription. `umschriftpy` should be able to import Egyptological transliteration/transcription entered in different Unicode flavours, as well as in the conventional fonts Umschrift_TTn, Transliteration and Trlit_CG Times, and using different Egyptological conventions. One particular application for which it was developed is the matching of entries in different databases. The Leiden Unified Transliteration/Transcription https://www.iae-egyptology.org/the-leiden-unified-transliteration serves as the basis for the normalisation.
+
+It is intended to be ported to other common programming languages used in the development of Egyptological applications.
 
 ## Usage
 
-The package provides a class for working with Egyptological transliteration/transcription named `UmschString` and methods for creating objects of this class from strings.
-In order to create an `UmschString` object you can use one of the folowing methods: 
+The package provides a class for working with Egyptological transliteration/transcription called `UmschString` and methods for creating objects of this class from strings.
+To create an `UmschString` object you can use one of the following methods:
 - `from_unicode` loads Unicode-formatted strings
 - `from_umschrift_ttn` loads strings formatted with Umschrift_TTn v3.0 font (https://wwwuser.gwdg.de/~lingaeg/lingaeg-stylesheet.htm)
 - `from_trlit_cg_times` loads strings formatted with the 2023 version of the Trlit_CG Times font (https://dmd.wepwawet.nl/fonts.htm https://oeb.griffith.ox.ac.uk/fonts.aspx)
 - `from_trlit_cg_times_2023` loads strings formatted with the pre-2023 version of the Trlit_CG Times font
 - `from_transliteration` loads strings formatted with Transliteration font (CCER), downloadable from the link above
 
-The `UmschString` object have export methods and support some of the Python string methods (`upper`, `lower`, `index`, `find`, `replace`, `endswith`, `startswith`)
+The `UmschString` objects have export methods for outputting strings and support some of the Python string methods (`upper`, `lower`, `index`, `find`, `replace`, `endswith`, `startswith`)
 Data can be cleaned up using the `filter` method, with filtering options set by flags:
 `UmFilter.MORPH` removes morphological markers `. : ·`
-`UmFilter.SUFF_PRON` removes suffix pronoum separators `⸗`
+`UmFilter.SUFF_PRON` removes suffix pronoun separators `⸗`
 `UmFilter.BRACKETS` removes brackets `⸢ ⸣ ⟨ ⟩ ( ) [ ] < > { } |`
-`UmFilter.PUNCT` removes puntuation `? ! " , .`
+`UmFilter.PUNCT` removes punctuation `? ! " , .`
 `UmFilter.ALL` removes all of the above
 `UmFilter.DIGITS` removes all digits
 `UmFilter.FACULTATIVE` removes parentheses and all signs enclosed in parentheses
 `UmFilter.LOWER` converts all transliteration/transcription to lower case
-`UmFilter.HYPHENS` replaces all hypthens with spaces
+`UmFilter.HYPHENS` replaces all hyphens with spaces
 
-Data can be outputted to string using the `to_unicode` method. By default this method uses the Leiden Unified Transliteration/Transcription, however divergences can be set up by optional flags: 
+Data can be output to string using the `to_unicode` method. By default this method uses the Leiden Unified Transliteration/Transcription, but deviations  can be set up by optional flags: 
 `UmExport.K_WITH_DOT` uses ḳ and Ḳ for q and Q
 `UmExport.J_FOR_YOD`  uses j and J for ꞽ and Ꞽ
 `UmExport.JJ_FOR_DOUBLE_YOD`  uses jj and Jj for y and Y as well as for ï and Ï
@@ -94,4 +92,4 @@ print([item.to_unicode() for item in name_list_sorted])
 ## Disclaimer and acknowledgements
 The current preliminary version is merely a proof of concept. It is not yet ready for use. 
 
-The package is developed as part of the project “Altägyptische Titel in amtlichen und familiären Kontexten, 2055-1352 v. Chr.”, funded by the Fritz Thyssen Foundation.
+The package is being developed as part of the project “Altägyptische Titel in amtlichen und familiären Kontexten, 2055-1352 v. Chr.”, funded by the Fritz Thyssen Foundation.

@@ -26,14 +26,14 @@ class UmExport(IntFlag):
 
 class UmFilter(IntFlag):
     MORPH = auto()  # removes morphological markers . : ·
-    SUFF_PRON = auto()  # removes suffix pronoum separators ⸗
+    SUFF_PRON = auto()  # removes suffix pronoun separators ⸗
     BRACKETS = auto()  # removes brackets ⸢ ⸣ ⟨ ⟩ ( ) [ ] < > { } |
-    PUNCT = auto()  # removes puntuation ? ! " , .
+    PUNCT = auto()  # removes punctuation ? ! " , .
     ALL = MORPH | SUFF_PRON | BRACKETS | PUNCT  # removes all of the above
     DIGITS = auto()  # removes all digits
     FACULTATIVE = auto()  # removes parentheses and all signs enclosed in parentheses
     LOWER = auto()  # converts all transliteration/transcription to lower case
-    HYPHENS = auto()  # replaces all hypthens with spaces
+    HYPHENS = auto()  # replaces all hyphens with spaces
 
 
 ASC_SPACE = 32
