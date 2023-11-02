@@ -1,5 +1,5 @@
 # umschrift*py*
-A Python library for dealing with Egyptological transliteration/transcription.
+A Python 3 library for dealing with Egyptological transliteration/transcription.
 
 ## Description
 

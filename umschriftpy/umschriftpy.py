@@ -304,7 +304,12 @@ EXPORT_MULTICHAR_DICT = {Format.UNICODE: {PSEUDO_i_WITH_INVERTED_BREVE: array.ar
 
 
 class UmschString(array.array):
-    def to_unicode(self, flags=0):
+    def __getitem__(self, key):  # makes sure that slicing does not result in object type change
+        if type(key) == slice:
+            return UmschString("L", super().__getitem__(key))
+        return super().__getitem__(key)
+
+    def to_unicode(self, flags=0):  # exports array content as a Unicode-formatted string
         copy = UmschString('L', self)
 
         if flags & UmExport.SUPRESS_I_WITH_DIAERESIS:
