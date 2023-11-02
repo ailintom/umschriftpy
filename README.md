@@ -1,5 +1,7 @@
-# umschriftpy
+# umschrift*py*
 A Python library for dealing with Egyptological transliteration/transcription.
+
+## Description
 This library is made for standardizing Egyptological transliteration/transcription with the aim of processing data stemming from digital project with different approaches to Egyptological transliteration/transcription.
 `umschriftpy` should be able to import Egyptological transliteration/transcription entered in different flavours of Unicode, as well as in conventional fonts Umschrift_TTn, Transliteration, and Trlit_CG Times and using different Egyptological conventions.
 One particultar application it was developed for is matching entries in across different databases.
@@ -9,7 +11,7 @@ It aims to be ported to other common programming languages used in the developme
 
 ## Usage
 
-The package provides a class for working with Egyptological transliteration/transcription named `UmschString` and methods for creating objects of this class from srtings.
+The package provides a class for working with Egyptological transliteration/transcription named `UmschString` and methods for creating objects of this class from strings.
 In order to create an `UmschString` object you can use one of the folowing methods: 
 - `from_unicode` loads Unicode-formatted strings
 - `from_umschrift_ttn` loads strings formatted with Umschrift_TTn v3.0 font (https://wwwuser.gwdg.de/~lingaeg/lingaeg-stylesheet.htm)
@@ -19,10 +21,10 @@ In order to create an `UmschString` object you can use one of the folowing metho
 
 The `UmschString` object have export methods and support some of the Python string methods (`upper`, `lower`, `index`, `find`, `replace`, `endswith`, `startswith`)
 Data can be cleaned up using the `filter` method, with filtering options set by flags:
-`UmFilter.MORPH` removes morphological markers . : ·
-`UmFilter.SUFF_PRON` removes suffix pronoum separators ⸗
-`UmFilter.BRACKETS` removes brackets ⸢ ⸣ ⟨ ⟩ ( ) [ ] < > { } |
-`UmFilter.PUNCT` removes puntuation ? ! " , .
+`UmFilter.MORPH` removes morphological markers `. : ·`
+`UmFilter.SUFF_PRON` removes suffix pronoum separators `⸗`
+`UmFilter.BRACKETS` removes brackets `⸢ ⸣ ⟨ ⟩ ( ) [ ] < > { } |`
+`UmFilter.PUNCT` removes puntuation `? ! " , .`
 `UmFilter.ALL` removes all of the above
 `UmFilter.DIGITS` removes all digits
 `UmFilter.FACULTATIVE` removes parentheses and all signs enclosed in parentheses
@@ -36,7 +38,7 @@ Data can be outputted to string using the `to_unicode` method. By default this m
 `UmExport.SUPRESS_I_WITH_DIAERESIS`  uses y and Y for ï and Ï
 Flags can be combined using the bitwise OR `|` operator
 
-Examples: 
+## Examples: 
 ```python
 from umschriftpy import *
 
@@ -63,23 +65,22 @@ print(a_filtered == b_filtered) # filtered strings are now equal
 print(a_filtered.to_unicode())
 # >>> ḥꜣtꞽ ꜥ yꜣ
 
+# inputting several names as a list
 name_list = [from_transliteration("nfr-Htp"), from_transliteration(
     "aA-ptH"), from_transliteration("DHw.tj-nfr"), from_transliteration("Aw-jb")]
-# inputting several names as a list
+# filtering list values
 name_list_filtered = [item.filter(UmFilter.ALL | UmFilter.LOWER)
-                      for item in name_list]  # filters values
+                      for item in name_list]  
 # using a standard Python function to sort items
 name_list_sorted = sorted(name_list_filtered)
 # outputting the sorted list as Unicode
 print([item.to_unicode() for item in name_list_sorted])
 # >>> ['ꜣw-ꞽb', 'ꜥꜣ-ptḥ', 'nfr-ḥtp', 'ḏḥwtꞽ-nfr']
 
-
-
 ```
 
 
-## Disclaimer
+## Disclaimer and acknowledgements
 The current preliminary version is merely a proof of concept. It is not yet ready for use. 
 
 The package is developed as part of the project “Altägyptische Titel in amtlichen und familiären Kontexten, 2055-1352 v. Chr.”, funded by the Fritz Thyssen Foundation.
