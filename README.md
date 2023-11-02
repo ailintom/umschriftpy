@@ -42,25 +42,31 @@ Flags can be combined using the bitwise OR `|` operator
 ```python
 from umschriftpy import *
 
-uma = from_trlit_cg_times("Htp dj nsw Wp-WAwt nb tA Dsr dj=f prt-xrw (m) t Hnqt") # imports a Trlit_CG Times string 
-uma_lower = uma.lower() # converts it to lower cases
-uma_replaced = uma_lower.replace(from_trlit_cg_times("nsw"), from_trlit_cg_times("njswt")) # replaces a word
-print(uma_replaced.to_unicode()) # exports to Unicode
+# imports a Trlit_CG Times string
+uma = from_trlit_cg_times(
+    "Htp dj nsw Wp-WAwt nb tA Dsr dj=f prt-xrw (m) t Hnqt")
+uma_lower = uma.lower()  # converts it to lower cases
+uma_replaced = uma_lower.replace(from_trlit_cg_times(
+    "nsw"), from_trlit_cg_times("njswt"))  # replaces a word
+print(uma_replaced.to_unicode())  # exports to Unicode
 # >>> ḥtp dꞽ nꞽswt wp-wꜣwt nb tꜣ ḏsr dꞽ⸗f prt-ḫrw (m) t ḥnqt
-print(uma_replaced.to_unicode(UmExport.K_WITH_DOT)) # exports to Unicode with a special option (ḳ instead of q)
+# exports to Unicode with a special option (ḳ instead of q)
+print(uma_replaced.to_unicode(UmExport.K_WITH_DOT))
 # >>> ḥtp dꞽ nꞽswt wp-wꜣwt nb tꜣ ḏsr dꞽ⸗f prt-ḫrw (m) t ḥnḳt
 
-a = from_umschrift_ttn("O#.tj-o-jj#") # imports an Umschrift_TTn string
+a = from_umschrift_ttn("O#.tj-o-jj#")  # imports an Umschrift_TTn string
 print(a.to_unicode())
 # >>> Ḥꜣ.tꞽ-ꜥ-yꜣ
-b = from_unicode("ḥꜣtꞽ ꜥ yꜣ") # imports an Unicode string
+b = from_unicode("ḥꜣtꞽ ꜥ yꜣ")  # imports an Unicode string
 print(b.to_unicode())
 # >>> ḥꜣtꞽ ꜥ yꜣ
-print(a == b) # the strings are different because of different punctuation, lowercase and uppercase letters
+# the strings are different because of different punctuation, lowercase and uppercase letters
+print(a == b)
 # >>> False
 a_filtered = a.filter(UmFilter.ALL | UmFilter.HYPHENS | UmFilter.LOWER)
-b_filtered = b.filter(UmFilter.ALL | UmFilter.HYPHENS | UmFilter.LOWER) # filters strings
-print(a_filtered == b_filtered) # filtered strings are now equal
+b_filtered = b.filter(UmFilter.ALL | UmFilter.HYPHENS |
+                      UmFilter.LOWER)  # filters strings
+print(a_filtered == b_filtered)  # filtered strings are now equal
 # >>> True
 print(a_filtered.to_unicode())
 # >>> ḥꜣtꞽ ꜥ yꜣ
@@ -70,13 +76,12 @@ name_list = [from_transliteration("nfr-Htp"), from_transliteration(
     "aA-ptH"), from_transliteration("DHw.tj-nfr"), from_transliteration("Aw-jb")]
 # filtering list values
 name_list_filtered = [item.filter(UmFilter.ALL | UmFilter.LOWER)
-                      for item in name_list]  
+                      for item in name_list]
 # using a standard Python function to sort items
 name_list_sorted = sorted(name_list_filtered)
 # outputting the sorted list as Unicode
 print([item.to_unicode() for item in name_list_sorted])
 # >>> ['ꜣw-ꞽb', 'ꜥꜣ-ptḥ', 'nfr-ḥtp', 'ḏḥwtꞽ-nfr']
-
 ```
 
 
