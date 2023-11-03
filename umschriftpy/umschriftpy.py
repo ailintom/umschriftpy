@@ -33,11 +33,12 @@ class UmFilter(IntFlag):
     PUNCT = auto()  # removes punctuation ? ! " , .
     # removes  all of the above
     CLEAN = MORPH | SUFF_PRON | BRACKETS | PUNCT
+    REPLACE_Z = auto()  # uses s for z and S for Z
     REPLACE_I_WITH_DIAERESIS = auto()  # uses y for ï
     REPLACE_INVERTED_BREVES = auto()  # uses ꞽ for i̯, w for u̯
     REPLACE_UNCERTAIN_CONSONANT = auto()  # uses ꜣ for ꜥ
     REPLACE_ALL = REPLACE_I_WITH_DIAERESIS | REPLACE_INVERTED_BREVES | \
-        REPLACE_UNCERTAIN_CONSONANT  # replaces all of the above
+        REPLACE_UNCERTAIN_CONSONANT | REPLACE_Z  # replaces all of the above
     DIGITS = auto()  # removes all digits
     FACULTATIVE = auto()  # removes parentheses and all signs enclosed in parentheses
     LOWER = auto()  # converts all transliteration/transcription to lower case
@@ -428,7 +429,9 @@ class UmschString(array.array):
                             PSEUDO_U_WITH_INVERTED_BREVE: PSEUDO_W})
         if flags & UmFilter.REPLACE_UNCERTAIN_CONSONANT:
             replaces.update({PSEUDO_RIGHT_HALF_RING: PSEUDO_SMALL_ALEPH})
-        print(replaces)
+        if flags & UmFilter.REPLACE_Z:
+            replaces.update({PSEUDO_Z: PSEUDO_S, PSEUDO_z: PSEUDO_s})
+
         i = 0
         while i < len(self):
             char = self[i]

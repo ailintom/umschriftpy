@@ -25,6 +25,7 @@ Data can be cleaned up using the `filter` method, with filtering options set by 
 `UmFilter.BRACKETS` removes brackets `⸢ ⸣ ⟨ ⟩ ( ) [ ] < > { } |`
 `UmFilter.PUNCT` removes punctuation `? ! " , .`
 `UmFilter.CLEAN` removes all of the above
+`UmFilter.REPLACE_Z` uses s for z and S for Z
 `UmFilter.REPLACE_I_WITH_DIAERESIS` uses y for ï
 `UmFilter.REPLACE_INVERTED_BREVES` uses ꞽ for i̯, w for u̯
 `UmFilter.REPLACE_UNCERTAIN_CONSONANT` uses ꜣ for ꜥ
