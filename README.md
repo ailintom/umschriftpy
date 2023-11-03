@@ -95,6 +95,11 @@ print([item.to_unicode() for item in name_list_sorted])
 # >>> ['ꜣw-ꞽb', 'ꜥꜣ-ptḥ', 'nfr-ḥtp', 'ḏḥwtꞽ-nfr']
 ```
 
+## Why a transliteration/transcription library?
+
+When dealing with Egyptological transliteration/transcription in database projects, one is faced with several difficulties. While some projects use Unicode for transliteration/transcription, others still use legacy fonts. There are also different variants of Unicode-based encoding (different codepoints for aleph, ayin and yod), not to mention different systems of transliteration traditionally used in the discipline (*ꞽ* or *j*; *q* or *ḳ*; *ṯ/d/ḏ*0 or *č/ṭ/č̣*), which makes it difficult to match transliterations across databases.
+Database systems and standard programming language libraries do not natively allow sorting of Egyptological transliteration/transcription values. Irregularities sometimes occur when programmably comparing Egyptological transliterations/transcriptions.
+I think that one possible way to streamline the processing of Egyptological transliteration/transcription in digital projects is to develop dedicated libraries for this particular task. Ideally, these libraries should be ported to a variety of programming languages used in digital Egyptology to serve as building elements for different applications.
 
 ## Disclaimer and acknowledgements
 The current preliminary version is merely a proof of concept. 
