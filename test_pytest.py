@@ -123,3 +123,8 @@ def test_replace():
     assert au.filter(UmFilter.REPLACE_INVERTED_BREVES)==bu  
     assert au.filter(UmFilter.REPLACE_UNCERTAIN_CONSONANT)  ==cu  
     assert au.filter(UmFilter.REPLACE_I_WITH_DIAERESIS)  ==du 
+def test_mix_with_hieroglyphs():
+    a = r"nṯr ꜥꜣ nb pt 𓇯👨‍👩‍👦"
+    au = from_unicode(a)
+    print(au)
+    assert au.to_unicode()==a

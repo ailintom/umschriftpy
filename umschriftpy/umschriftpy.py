@@ -308,8 +308,8 @@ EXPORT_DICT_K_WITH_DOT = {Format.UNICODE: {
 EXPORT_DICT_J_FOR_YOD = {Format.UNICODE: {
     PSEUDO_CAPITAL_YOD: ASC_J, PSEUDO_SMALL_YOD: ASC_j}}
 
-EXPORT_MULTICHAR_DICT = {Format.UNICODE: {PSEUDO_i_WITH_INVERTED_BREVE: array.array('u', [chr(ASC_i), chr(UN_COMBINING_INVERTED_BREVE)]), PSEUDO_I_WITH_INVERTED_BREVE: array.array('u', [chr(ASC_I), chr(UN_COMBINING_INVERTED_BREVE)]), PSEUDO_u_WITH_INVERTED_BREVE: array.array('u', [chr(ASC_u), chr(UN_COMBINING_INVERTED_BREVE)]), PSEUDO_U_WITH_INVERTED_BREVE: array.array(
-    'u', [chr(ASC_U), chr(UN_COMBINING_INVERTED_BREVE)]), PSEUDO_H_WITH_LINE: array.array('u', [chr(ASC_H), chr(UN_COMBINING_MACRON_BELOW)]), PSEUDO_h_WITH_CURCUMFLEX: array.array('u', [chr(ASC_h), chr(UN_COMBINING_CIRCUMFLEX_BELOW)]), PSEUDO_H_WITH_CURCUMFLEX: array.array('u', [chr(ASC_H), chr(UN_COMBINING_CIRCUMFLEX_BELOW)])}}
+EXPORT_MULTICHAR_DICT = {Format.UNICODE: {PSEUDO_i_WITH_INVERTED_BREVE: array.array('L', [(ASC_i), (UN_COMBINING_INVERTED_BREVE)]), PSEUDO_I_WITH_INVERTED_BREVE: array.array('L', [(ASC_I), (UN_COMBINING_INVERTED_BREVE)]), PSEUDO_u_WITH_INVERTED_BREVE: array.array('L', [(ASC_u), (UN_COMBINING_INVERTED_BREVE)]), PSEUDO_U_WITH_INVERTED_BREVE: array.array(
+    'L', [(ASC_U), (UN_COMBINING_INVERTED_BREVE)]), PSEUDO_H_WITH_LINE: array.array('L', [(ASC_H), (UN_COMBINING_MACRON_BELOW)]), PSEUDO_h_WITH_CURCUMFLEX: array.array('L', [(ASC_h), (UN_COMBINING_CIRCUMFLEX_BELOW)]), PSEUDO_H_WITH_CURCUMFLEX: array.array('L', [(ASC_H), (UN_COMBINING_CIRCUMFLEX_BELOW)])}}
 
 
 class UmschString(array.array):
@@ -496,7 +496,7 @@ def from_transliteration(input):
 def export_string(input, output_format, flags=0):
     if (not input):
         return str()
-    res = array.array('u')
+    res = array.array('L')
     export_dict = EXPORT_DICT[output_format].copy()
     if flags & UmExport.K_WITH_DOT:
         export_dict.update(EXPORT_DICT_K_WITH_DOT[output_format])
@@ -507,10 +507,13 @@ def export_string(input, output_format, flags=0):
         if (char in export_multichar_dict):
             res.extend(export_multichar_dict[char])
         elif (char in export_dict):
-            res.append(chr(export_dict[char]))
+            res.append((export_dict[char]))
         else:
-            res.append(chr(char))
-    return array.array('u', res).tounicode()
+            res.append((char))
+    if byteorder == "little":
+        return res.tobytes().decode("utf_32_le")
+    return res.tobytes().decode("utf_32_be")
+
 
 # Imports data from a string to an Umschrift array
 
