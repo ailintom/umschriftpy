@@ -1,5 +1,6 @@
 # pyUmschrift
 import array
+from sys import byteorder
 # from .constants import *
 # from .dicts import *
 from enum import IntEnum, IntFlag, auto
@@ -310,6 +311,11 @@ class UmschString(array.array):
             return UmschString("L", super().__getitem__(key))
         return super().__getitem__(key)
 
+    def to_pseudo(self):  # exports array as a string of pseudo characters that can be used for sorting and comparison using binary-based locales (for example in databases)
+        if byteorder == "little":
+            return self.tobytes().decode("utf_32_le")
+        return self.tobytes().decode("utf_32_be")
+
     def to_unicode(self, flags=0):  # exports array content as a Unicode-formatted string
         copy = UmschString('L', self)
 
@@ -441,8 +447,8 @@ def cased(char):
         return False
 
 
-def export_unicode(input):
-    return export_string(input, Format.UNICODE)
+def from_pseudo(input):
+    return UmschString("L", [ord(s) for s in input])
 
 
 def from_unicode(input):

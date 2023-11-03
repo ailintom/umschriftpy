@@ -9,4 +9,3 @@ example.py
 __pycache__/test_pytest.cpython-311-pytest-7.4.3.pyc
 .vscode/settings.json
 .gitignore
-test_pytest.py
