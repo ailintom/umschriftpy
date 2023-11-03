@@ -92,6 +92,6 @@ print([item.to_unicode() for item in name_list_sorted])
 
 
 ## Disclaimer and acknowledgements
-The current preliminary version is merely a proof of concept. It is not yet ready for use. 
+The current preliminary version is merely a proof of concept. 
 
 The package is being developed as part of the project “Altägyptische Titel in amtlichen und familiären Kontexten, 2055-1352 v. Chr.”, funded by the Fritz Thyssen Foundation.
