@@ -36,7 +36,7 @@ Data can be output to string using the `to_unicode` method. By default this meth
 `UmExport.SUPRESS_I_WITH_DIAERESIS`  uses y and Y for ï and Ï
 Flags can be combined using the bitwise OR `|` operator
 
-Besides, data can be output using the `to_pseudo` method. It produces pseudo-coded Unicode strings, which can be stored, for example, in a database TEXT field and used for (case-sensitive) binary-based sorting and string comparison of the original transliteration/transcription strings. Pseudo-coded Unicode strings can be loaded into `UmschString` objects using the additional `from_pseudo` method. For an example, see the `test_pseudo()` method in `test_pytest.py`.
+Besides, data can be output using the `to_pseudo` method. It produces pseudo-coded Unicode strings, which can be stored, for example, in a database TEXT field and used for (case-sensitive) binary-based sorting and string comparison of the original transliteration/transcription strings (tested with SQLite and MariaDB/MySQL). Pseudo-coded Unicode strings can be loaded into `UmschString` objects using the additional `from_pseudo` method. For an example, see the `test_pseudo()` method in `test_pytest.py`.
 
 ## Examples: 
 ```python
