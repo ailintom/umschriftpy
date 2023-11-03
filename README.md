@@ -19,11 +19,16 @@ To create an `UmschString` object you can use one of the following methods:
 
 The `UmschString` objects have export methods for outputting strings and support some of the Python string methods (`upper`, `lower`, `index`, `find`, `replace`, `endswith`, `startswith`)
 Data can be cleaned up using the `filter` method, with filtering options set by flags:
+
 `UmFilter.MORPH` removes morphological markers `. : ·`
 `UmFilter.SUFF_PRON` removes suffix pronoun separators `⸗`
 `UmFilter.BRACKETS` removes brackets `⸢ ⸣ ⟨ ⟩ ( ) [ ] < > { } |`
 `UmFilter.PUNCT` removes punctuation `? ! " , .`
-`UmFilter.ALL` removes all of the above
+`UmFilter.CLEAN` removes all of the above
+`UmFilter.REPLACE_I_WITH_DIAERESIS` uses y for ï
+`UmFilter.REPLACE_INVERTED_BREVES` uses ꞽ for i̯, w for u̯
+`UmFilter.REPLACE_UNCERTAIN_CONSONANT` uses ꜣ for ꜥ
+`UmFilter.REPLACE_ALL` replaces all the three of the above
 `UmFilter.DIGITS` removes all digits
 `UmFilter.FACULTATIVE` removes parentheses and all signs enclosed in parentheses
 `UmFilter.LOWER` converts all transliteration/transcription to lower case
@@ -33,7 +38,7 @@ Data can be output to string using the `to_unicode` method. By default this meth
 `UmExport.K_WITH_DOT` uses ḳ and Ḳ for q and Q
 `UmExport.J_FOR_YOD`  uses j and J for ꞽ and Ꞽ
 `UmExport.JJ_FOR_DOUBLE_YOD`  uses jj and Jj for y and Y as well as for ï and Ï
-`UmExport.SUPRESS_I_WITH_DIAERESIS`  uses y and Y for ï and Ï
+`UmExport.REPLACE_I_WITH_DIAERESIS`  uses y and Y for ï and Ï
 Flags can be combined using the bitwise OR `|` operator
 
 Besides, data can be output using the `to_pseudo` method. It produces pseudo-coded Unicode strings, which can be stored, for example, in a database TEXT field and used for (case-sensitive) binary-based sorting and string comparison of the original transliteration/transcription strings (tested with SQLite and MariaDB/MySQL). Pseudo-coded Unicode strings can be loaded into `UmschString` objects using the additional `from_pseudo` method. For an example, see the `test_pseudo()` method in `test_pytest.py`.
@@ -67,8 +72,8 @@ print(b.to_unicode())
 # the strings are different because of different punctuation, lowercase and uppercase letters
 print(a == b)
 # >>> False
-a_filtered = a.filter(UmFilter.ALL | UmFilter.HYPHENS | UmFilter.LOWER)
-b_filtered = b.filter(UmFilter.ALL | UmFilter.HYPHENS |
+a_filtered = a.filter(UmFilter.CLEAN | UmFilter.HYPHENS | UmFilter.LOWER)
+b_filtered = b.filter(UmFilter.CLEAN | UmFilter.HYPHENS |
                       UmFilter.LOWER)  # filters strings
 print(a_filtered == b_filtered)  # filtered strings are now equal
 # >>> True
@@ -81,7 +86,7 @@ print(a_filtered.to_unicode())
 name_list = [from_transliteration("nfr-Htp"), from_transliteration(
     "aA-ptH"), from_transliteration("DHw.tj-nfr"), from_transliteration("Aw-jb")]
 # filtering list values
-name_list_filtered = [item.filter(UmFilter.ALL | UmFilter.LOWER)
+name_list_filtered = [item.filter(UmFilter.CLEAN | UmFilter.LOWER)
                       for item in name_list]
 # using a standard Python function to sort items
 name_list_sorted = sorted(name_list_filtered)

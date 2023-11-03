@@ -7,7 +7,7 @@ def test_sort():
     name_list = [from_transliteration("nfr-Htp"), from_transliteration(
         "aA-ptH"), from_transliteration("DHw.tj-nfr"), from_transliteration("Aw-jb")]
     # filtering list values
-    name_list_filtered = [item.filter(UmFilter.ALL | UmFilter.LOWER)
+    name_list_filtered = [item.filter(UmFilter.CLEAN | UmFilter.LOWER)
                         for item in name_list]
     # using a standard Python function to sort items
     name_list_sorted = sorted(name_list_filtered)
@@ -20,7 +20,7 @@ def test_pseudo():
     name_list = [from_transliteration("nfr-Htp"), from_transliteration(
     "aA-ptH"), from_transliteration("DHw.tj-nfr"), from_transliteration("Aw-jb")]
     # filtering list values
-    name_list_filtered = [item.filter(UmFilter.ALL | UmFilter.LOWER)
+    name_list_filtered = [item.filter(UmFilter.CLEAN | UmFilter.LOWER)
                         for item in name_list]
 
     pseudo_strings = [item.to_pseudo() for item in name_list_filtered]
@@ -51,8 +51,8 @@ def test_filter():
     # the strings are different because of different punctuation, lowercase and uppercase letters
     print(a == b)
     # >>> False
-    a_filtered = a.filter(UmFilter.ALL | UmFilter.HYPHENS | UmFilter.LOWER)
-    b_filtered = b.filter(UmFilter.ALL | UmFilter.HYPHENS |
+    a_filtered = a.filter(UmFilter.CLEAN | UmFilter.HYPHENS | UmFilter.LOWER)
+    b_filtered = b.filter(UmFilter.CLEAN | UmFilter.HYPHENS |
                           UmFilter.LOWER)  # filters strings
 
     assert a_filtered == b_filtered
@@ -112,3 +112,14 @@ def test_lcase():
     au = from_unicode(a)
     bu = from_unicode(b)
     assert au.lower()==bu   
+def test_replace():
+    a = r"pu̯ pi̯ pʾ pï"
+    au = from_unicode(a)
+    bu = from_unicode(r"pw pj pʾ pï")
+    cu = from_unicode(r"pu̯ pi̯ pꜣ pï")
+    du = from_unicode(r"pu̯ pi̯ pʾ py")
+
+
+    assert au.filter(UmFilter.REPLACE_INVERTED_BREVES)==bu  
+    assert au.filter(UmFilter.REPLACE_UNCERTAIN_CONSONANT)  ==cu  
+    assert au.filter(UmFilter.REPLACE_I_WITH_DIAERESIS)  ==du 

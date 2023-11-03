@@ -22,15 +22,22 @@ class UmExport(IntFlag):
     K_WITH_DOT = auto()  # uses ḳ and Ḳ for q and Q
     J_FOR_YOD = auto()  # uses j and J for ꞽ and Ꞽ
     JJ_FOR_DOUBLE_YOD = auto()  # uses jj and Jj for y and Y
-    SUPRESS_I_WITH_DIAERESIS = auto()  # uses y and Y for ï and Ï
+    REPLACE_I_WITH_DIAERESIS = auto()  # uses y and Y for ï and Ï
 
 
 class UmFilter(IntFlag):
+
     MORPH = auto()  # removes morphological markers . : ·
     SUFF_PRON = auto()  # removes suffix pronoun separators ⸗
     BRACKETS = auto()  # removes brackets ⸢ ⸣ ⟨ ⟩ ( ) [ ] < > { } |
     PUNCT = auto()  # removes punctuation ? ! " , .
-    ALL = MORPH | SUFF_PRON | BRACKETS | PUNCT  # removes all of the above
+    # removes  all of the above
+    CLEAN = MORPH | SUFF_PRON | BRACKETS | PUNCT
+    REPLACE_I_WITH_DIAERESIS = auto()  # uses y for ï
+    REPLACE_INVERTED_BREVES = auto()  # uses ꞽ for i̯, w for u̯
+    REPLACE_UNCERTAIN_CONSONANT = auto()  # uses ꜣ for ꜥ
+    REPLACE_ALL = REPLACE_I_WITH_DIAERESIS | REPLACE_INVERTED_BREVES | \
+        REPLACE_UNCERTAIN_CONSONANT  # replaces all of the above
     DIGITS = auto()  # removes all digits
     FACULTATIVE = auto()  # removes parentheses and all signs enclosed in parentheses
     LOWER = auto()  # converts all transliteration/transcription to lower case
@@ -319,7 +326,7 @@ class UmschString(array.array):
     def to_unicode(self, flags=0):  # exports array content as a Unicode-formatted string
         copy = UmschString('L', self)
 
-        if flags & UmExport.SUPRESS_I_WITH_DIAERESIS:
+        if flags & UmExport.REPLACE_I_WITH_DIAERESIS:
 
             copy = copy.replace(UmschString('L', [PSEUDO_I_WITH_DIAERESIS]), UmschString('L', [PSEUDO_Y])).replace(
                 UmschString('L', [PSEUDO_i_WITH_DIAERESIS]), UmschString('L', [PSEUDO_y]))
@@ -391,7 +398,7 @@ class UmschString(array.array):
     def filter(self, flags=0):
         between_parentheses = False
         filtered_signs = []
-        replace_with_space = []
+        replaces = {}
         res = UmschString('L')
         if flags & UmFilter.MORPH:
             filtered_signs.extend(
@@ -407,8 +414,21 @@ class UmschString(array.array):
         if flags & UmFilter.DIGITS:
             filtered_signs.extend(range(ASC_ZERO, ASC_NINE))
         if flags & UmFilter.HYPHENS:
-            replace_with_space.extend([ASC_HYPHEN_MINUS, UN_MINUS_SIGN])
-            replace_with_space.extend(range(UN_HYPHEN, UN_HORIZONTAL_BAR))
+            replaces.update({ASC_HYPHEN_MINUS: ASC_SPACE,
+                            UN_MINUS_SIGN: ASC_SPACE})
+            replaces.update(dict.fromkeys(
+                range(UN_HYPHEN, UN_HORIZONTAL_BAR), ASC_SPACE))
+        if flags & UmFilter.REPLACE_I_WITH_DIAERESIS:
+            replaces.update({PSEUDO_i_WITH_DIAERESIS: PSEUDO_y,
+                             PSEUDO_I_WITH_DIAERESIS: PSEUDO_Y})
+        if flags & UmFilter.REPLACE_INVERTED_BREVES:
+            replaces.update({PSEUDO_i_WITH_INVERTED_BREVE: PSEUDO_SMALL_YOD,
+                             PSEUDO_I_WITH_INVERTED_BREVE: PSEUDO_CAPITAL_YOD,
+                            PSEUDO_u_WITH_INVERTED_BREVE: PSEUDO_w,
+                            PSEUDO_U_WITH_INVERTED_BREVE: PSEUDO_W})
+        if flags & UmFilter.REPLACE_UNCERTAIN_CONSONANT:
+            replaces.update({PSEUDO_RIGHT_HALF_RING: PSEUDO_SMALL_ALEPH})
+        print(replaces)
         i = 0
         while i < len(self):
             char = self[i]
@@ -416,8 +436,8 @@ class UmschString(array.array):
                 between_parentheses = not (char == ASC_RIGHT_PARENTHESIS)
             elif (flags & UmFilter.FACULTATIVE) and char == ASC_LEFT_PARENTHESIS:
                 between_parentheses = True
-            elif replace_with_space and char in replace_with_space:
-                res.append(ASC_SPACE)
+            elif replaces and char in replaces:
+                res.append(replaces[char])
             elif not char in filtered_signs:
                 res.append(char)
             i += 1
