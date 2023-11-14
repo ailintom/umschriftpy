@@ -1,6 +1,12 @@
 # umschrift*py*
 A Python 3 library for dealing with Egyptological transliteration/transcription.
 
+---
+**NB**
+If you are looking for an end-user tool to convert Egyptological transliteration/transcription to Unicode, please visit the [Transliteration to Unicode Converter]https://pnm.uni-mainz.de/tools/unicode/).
+
+---
+
 ## Description
 
 This library is made for standardising Egyptological transliteration/transcription with the aim of processing data from digital projects with different approaches to Egyptological transliteration/transcription. `umschriftpy` should be able to import Egyptological transliteration/transcription entered in different Unicode flavours, as well as in the conventional fonts Umschrift_TTn, Transliteration and Trlit_CG Times, and using different Egyptological conventions. One particular application for which it was developed is the matching of entries in different databases. The Leiden Unified Transliteration/Transcription https://www.iae-egyptology.org/the-leiden-unified-transliteration serves as the basis for the normalisation.
