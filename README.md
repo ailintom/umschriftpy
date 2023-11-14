@@ -3,7 +3,7 @@ A Python 3 library for dealing with Egyptological transliteration/transcription.
 
 ---
 **NB**
-If you are looking for an end-user tool to convert Egyptological transliteration/transcription to Unicode, please visit the [Transliteration to Unicode Converter]https://pnm.uni-mainz.de/tools/unicode/).
+If you are looking for an end-user tool to convert Egyptological transliteration/transcription to Unicode, please visit the [Transliteration to Unicode Converter](https://pnm.uni-mainz.de/tools/unicode/).
 
 ---
 
