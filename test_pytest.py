@@ -72,6 +72,22 @@ def test_find_umschriftttn():
     assert au == bu[4:] and bu.find(au) == 4
 
 
+def test_common_chars():
+    a = from_unicode(r"gGtTp")
+    b = UmschString([0xF139, 0xF138, 0xF13B, 0xF13A, 0xF119])
+    assert a == b
+
+
+def test_find_all():
+    a = r"bdtpbdtptptptp"
+    b = r"p"
+    au = from_unicode(a)
+    bu = from_unicode(b)
+    assert au.find_all(bu, -5, -2) == [9, 11]
+    assert au.find_all(bu, 4, 11) == [7, 9]
+    assert au.find_all(bu, 4, -2) == [7, 9, 11]
+
+
 def test_transliteration():
     """Tests Transliteration imports."""
     a = r"~!@#$%^&*()_+QWERTYUIOP{}ASDFGHJKL:||ZXCVBNM<>?qwertyuiop[]asdfghjkl;'\\zxcvbnm,./"
@@ -141,7 +157,7 @@ def test_replace():
     assert au.filter(UmFilter.REPLACE_UNCERTAIN_CONSONANT) == cu
     assert au.filter(UmFilter.REPLACE_I_WITH_DIAERESIS) == du
     assert au.filter(UmFilter.REPLACE_Z) == eu
-    assert au.filter(UmFilter.REPLACE_ALL) == fu    
+    assert au.filter(UmFilter.REPLACE_ALL) == fu
 
 
 def test_mix_with_hieroglyphs():

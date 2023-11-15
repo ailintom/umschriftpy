@@ -302,6 +302,8 @@ IMPORT_DICT = {Format.UMSCHRIFT_TTN: {ASC_Y: PSEUDO_Y, ASC_L: PSEUDO_L, 0x00C7: 
                Format.TRLIT_CG_TIMES_2023: {ASC_L: 0x2E25, UN_I_WITH_DIAERESIS: PSEUDO_I_WITH_DIAERESIS, ASC_E: PSEUDO_E, ASC_e: PSEUDO_e, 0x7e: PSEUDO_TOP_LEFT_HALF_BRACKET, ASC_AT: PSEUDO_t_WITH_LINE, ASC_NUMBER: PSEUDO_TOP_RIGHT_HALF_BRACKET, ASC_DOLLAR: PSEUDO_d_WITH_LINE, ASC_ASTERISK: PSEUDO_RIGHT_HALF_RING, ASC_u: PSEUDO_h_WITH_CURCUMFLEX, ASC_Y: PSEUDO_i_WITH_DIAERESIS, ASC_x: PSEUDO_h_WITH_BREVE, ASC_A: PSEUDO_SMALL_ALEPH, ASC_a: PSEUDO_SMALL_AIN, ASC_i: PSEUDO_SMALL_YOD, ASC_H: PSEUDO_h_WITH_DOT, ASC_X: PSEUDO_h_WITH_LINE, ASC_c: PSEUDO_s, ASC_S: PSEUDO_s_WITH_CARON, ASC_q: PSEUDO_k, ASC_T: PSEUDO_t_WITH_LINE, ASC_D: PSEUDO_d_WITH_LINE, ASC_o: PSEUDO_q, 0x30: PSEUDO_H, 0x31: PSEUDO_H_WITH_DOT, 0x32: PSEUDO_H_WITH_BREVE, 0x33: PSEUDO_H_WITH_LINE, 0x34: PSEUDO_S, 0x35: PSEUDO_S_WITH_CARON, 0x36: PSEUDO_T, 0x37: PSEUDO_T_WITH_LINE, 0x38: PSEUDO_D, 0x39: PSEUDO_D_WITH_LINE, ASC_Q: PSEUDO_K, ASC_I: PSEUDO_CAPITAL_YOD, ASC_O: PSEUDO_Q, ASC_C: PSEUDO_S, ASC_V: PSEUDO_T_WITH_CURCUMFLEX, ASC_v: PSEUDO_t_WITH_CURCUMFLEX, ASC_AMPERSAND: ASC_AMPERSAND, ASC_EXCLAMATION_MARK: PSEUDO_d, ASC_EQUALS: PSEUDO_SUFFIX_PRONOMEN_SEPARATOR, ASC_CIRCUMFLEX_ACCENT: PSEUDO_H_WITH_CURCUMFLEX, 0x3c: PSEUDO_LEFT_ANGLE_BRACKET, 0x3e: PSEUDO_RIGHT_ANGLE_BRACKET},
                Format.TRANSLITERATION: {ASC_Y: PSEUDO_Y, ASC_L: PSEUDO_L, UN_I_WITH_DIAERESIS: PSEUDO_I_WITH_DIAERESIS, ASC_E: PSEUDO_E, ASC_e: PSEUDO_e, ASC_x: PSEUDO_h_WITH_BREVE, ASC_A: PSEUDO_SMALL_ALEPH, ASC_a: PSEUDO_SMALL_AIN, ASC_i: PSEUDO_SMALL_YOD, ASC_H: PSEUDO_h_WITH_DOT, ASC_X: PSEUDO_h_WITH_LINE, ASC_c: PSEUDO_s, ASC_S: PSEUDO_s_WITH_CARON, ASC_q: PSEUDO_q, ASC_T: PSEUDO_t_WITH_LINE, ASC_D: PSEUDO_d_WITH_LINE, ASC_o: PSEUDO_q, ASC_EXCLAMATION_MARK: PSEUDO_H, ASC_AT: PSEUDO_H_WITH_DOT, ASC_NUMBER: PSEUDO_H_WITH_BREVE, ASC_DOLLAR: PSEUDO_H_WITH_LINE, ASC_PERCENT: PSEUDO_S, ASC_CIRCUMFLEX_ACCENT: PSEUDO_S_WITH_CARON, ASC_YEN: PSEUDO_S_WITH_CARON, ASC_AMPERSAND: PSEUDO_T, ASC_ASTERISK: PSEUDO_T_WITH_LINE, ASC_SECTION: PSEUDO_T_WITH_LINE, ASC_LOW_LINE: PSEUDO_D, ASC_PLUS: PSEUDO_D_WITH_LINE, ASC_Q: PSEUDO_Q, ASC_I: PSEUDO_CAPITAL_YOD, ASC_O: PSEUDO_Q, ASC_C: PSEUDO_S, ASC_V: PSEUDO_h_WITH_CURCUMFLEX, ASC_v: PSEUDO_t_WITH_CURCUMFLEX, ASC_EQUALS: PSEUDO_SUFFIX_PRONOMEN_SEPARATOR},
                Format.COMMON_D: {0x1EC8: PSEUDO_CAPITAL_YOD, 0x1EC9: PSEUDO_SMALL_YOD, UN_i_WITH_DIAERESIS: PSEUDO_i_WITH_DIAERESIS, ASC_DOT: PSEUDO_DOT, ASC_COLON: PSEUDO_COLON, ASC_SUFFIX_PRONOMEN_SEPARATOR: PSEUDO_SUFFIX_PRONOMEN_SEPARATOR, ASC_b: PSEUDO_b, ASC_d: PSEUDO_d, ASC_f: PSEUDO_f, ASC_g: PSEUDO_g, ASC_h: PSEUDO_h, ASC_j: PSEUDO_SMALL_YOD, ASC_k: PSEUDO_k, ASC_l: PSEUDO_l, ASC_m: PSEUDO_m, ASC_n: PSEUDO_n, ASC_p: PSEUDO_p, ASC_q: PSEUDO_q, ASC_r: PSEUDO_r, ASC_s: PSEUDO_s, ASC_t: PSEUDO_t, ASC_w: PSEUDO_w, ASC_y: PSEUDO_y, ASC_z: PSEUDO_z, ASC_B: PSEUDO_B, ASC_F: PSEUDO_F, ASC_G: PSEUDO_G, ASC_J: PSEUDO_CAPITAL_YOD, ASC_K: PSEUDO_K, ASC_M: PSEUDO_M, ASC_N: PSEUDO_N, ASC_P: PSEUDO_P, ASC_Q: PSEUDO_Q, ASC_R: PSEUDO_R, ASC_W: PSEUDO_W, ASC_Z: PSEUDO_Z}}
+for imp_dict in IMPORT_DICT:
+    IMPORT_DICT[imp_dict].update(IMPORT_DICT[Format.COMMON_D])
 EXPORT_DICT = {Format.UNICODE: {PSEUDO_SMALL_ALEPH: UN_SMALL_ALEPH, PSEUDO_CAPITAL_ALEPH: UN_CAPITAL_ALEPH, PSEUDO_SMALL_YOD: UN_SMALL_YOD, PSEUDO_CAPITAL_YOD: UN_CAPITAL_YOD, PSEUDO_e: ASC_e, PSEUDO_E: ASC_E, PSEUDO_y: ASC_y, PSEUDO_Y: ASC_Y, PSEUDO_i_WITH_DIAERESIS: UN_i_WITH_DIAERESIS, PSEUDO_I_WITH_DIAERESIS: UN_I_WITH_DIAERESIS, PSEUDO_i_WITH_INVERTED_BREVE: UN_i_WITH_INVERTED_BREVE, PSEUDO_I_WITH_INVERTED_BREVE: UN_I_WITH_INVERTED_BREVE, PSEUDO_RIGHT_HALF_RING: UN_RIGHT_HALF_RING, PSEUDO_SMALL_AIN: UN_SMALL_AIN, PSEUDO_CAPITAL_AIN: UN_CAPITAL_AIN, PSEUDO_w: ASC_w, PSEUDO_W: ASC_W, PSEUDO_u_WITH_INVERTED_BREVE: UN_u_WITH_INVERTED_BREVE, PSEUDO_U_WITH_INVERTED_BREVE: UN_U_WITH_INVERTED_BREVE, PSEUDO_b: ASC_b, PSEUDO_B: ASC_B, PSEUDO_p: ASC_p, PSEUDO_P: ASC_P, PSEUDO_f: ASC_f, PSEUDO_F: ASC_F, PSEUDO_m: ASC_m, PSEUDO_M: ASC_M, PSEUDO_n: ASC_n, PSEUDO_N: ASC_N, PSEUDO_r: ASC_r, PSEUDO_R: ASC_R, PSEUDO_l: ASC_l, PSEUDO_L: ASC_L, PSEUDO_h: ASC_h, PSEUDO_H: ASC_H, PSEUDO_h_WITH_DOT: UN_h_WITH_DOT, PSEUDO_H_WITH_DOT: UN_H_WITH_DOT, PSEUDO_h_WITH_BREVE: UN_h_WITH_BREVE, PSEUDO_H_WITH_BREVE: UN_H_WITH_BREVE,
                                 PSEUDO_h_WITH_CURCUMFLEX: UN_h_WITH_CURCUMFLEX, PSEUDO_H_WITH_CURCUMFLEX: UN_H_WITH_CURCUMFLEX, PSEUDO_h_WITH_LINE: UN_h_WITH_LINE, PSEUDO_H_WITH_LINE: UN_H_WITH_LINE, PSEUDO_z: ASC_z, PSEUDO_Z: ASC_Z, PSEUDO_s: ASC_s, PSEUDO_S: ASC_S, PSEUDO_s_WITH_CARON: UN_s_WITH_CARON, PSEUDO_S_WITH_CARON: UN_S_WITH_CARON, PSEUDO_q: ASC_q, PSEUDO_Q: ASC_Q, PSEUDO_k: ASC_k, PSEUDO_K: ASC_K, PSEUDO_g: ASC_g, PSEUDO_G: ASC_G, PSEUDO_t: ASC_t, PSEUDO_T: ASC_T, PSEUDO_t_WITH_CURCUMFLEX: UN_t_WITH_CURCUMFLEX, PSEUDO_T_WITH_CURCUMFLEX: UN_T_WITH_CURCUMFLEX, PSEUDO_t_WITH_LINE: UN_t_WITH_LINE, PSEUDO_T_WITH_LINE: UN_T_WITH_LINE, PSEUDO_d: ASC_d, PSEUDO_D: ASC_D, PSEUDO_d_WITH_LINE: UN_d_WITH_LINE, PSEUDO_D_WITH_LINE: UN_D_WITH_LINE, PSEUDO_SUFFIX_PRONOMEN_SEPARATOR: UN_SUFFIX_PRONOMEN_SEPARATOR, PSEUDO_DOT: ASC_DOT, PSEUDO_COLON: ASC_COLON, PSEUDO_MIDDLE_DOT: UN_MIDDLE_DOT, PSEUDO_TOP_LEFT_HALF_BRACKET: UN_TOP_LEFT_HALF_BRACKET, PSEUDO_TOP_RIGHT_HALF_BRACKET: UN_TOP_RIGHT_HALF_BRACKET, PSEUDO_LEFT_ANGLE_BRACKET: UN_LEFT_ANGLE_BRACKET, PSEUDO_RIGHT_ANGLE_BRACKET: UN_RIGHT_ANGLE_BRACKET}}
 EXPORT_DICT_K_WITH_DOT = {Format.UNICODE: {
@@ -316,8 +318,61 @@ EXPORT_MULTICHAR_DICT = {Format.UNICODE: {PSEUDO_i_WITH_INVERTED_BREVE: array.ar
 class UmschString(array.array):
     def __getitem__(self, key):  # makes sure that slicing does not result in object type change
         if type(key) == slice:
-            return UmschString("L", super().__getitem__(key))
+            return UmschString(super().__getitem__(key))
         return super().__getitem__(key)
+
+    def __new__(cls, initializer=[], source_format: Format = Format.UNICODE):
+        if type(initializer) == str:
+            return UmschString._string_to_UmschrString(initializer, source_format)
+        # Uses unsigned long ints to store 4-byte chars
+        return (super().__new__(cls, 'L', initializer))
+
+# Imports data from a string to an Umschrift array
+    def _string_to_UmschrString(value: str, source_format: Format = Format.UNICODE):
+        i = 1
+        res = UmschString()
+        next_char = ord(value[0])
+        yod_flag = [0]
+
+        while i <= len(value):
+            current_char = next_char
+            next_char = ord(value[i]) if i < (len(value)) else 0
+            converted_char = UmschString._import_char(
+                current_char, next_char, source_format, yod_flag)
+            if (converted_char):
+                res.append(converted_char)
+            i += 1
+        return res
+
+    def _import_char(current_char, next_char, source_format, yod_flag):
+        ignored_chars = [UN_COMBINING_MACRON_BELOW, UN_COMBINING_CIRCUMFLEX_BELOW, UN_COMBINING_INVERTED_BREVE,
+                         UN_COMBINING_RIGHT_HALF_RING_ABOVE, UN_COMBINING_CYRILLIC_PSILI_PNEUMATA, UN_COMBINING_DOT_BELOW]
+        if current_char in ignored_chars:
+            return 0
+        if next_char == UN_COMBINING_MACRON_BELOW:
+            return UN_DECODE_BEFORE_COMBINING_MACRON[current_char]
+        if next_char == UN_COMBINING_CIRCUMFLEX_BELOW:
+            return UN_DECODE_BEFORE_COMBINING_CIRCUMFLEX[current_char]
+        if next_char == UN_COMBINING_INVERTED_BREVE:
+            return UN_DECODE_BEFORE_COMBINING_INVERTED_BREVE[current_char]
+        if next_char in [UN_COMBINING_RIGHT_HALF_RING_ABOVE, UN_COMBINING_CYRILLIC_PSILI_PNEUMATA]:
+            return UN_DECODE_BEFORE_COMBINING_HALF_RING_ABOVE[current_char]
+        if next_char == UN_COMBINING_DOT_BELOW:
+            return UN_DECODE_BEFORE_COMBINING_DOT_BELOW[current_char]
+        if (next_char in [ASC_j, ASC_J]) and (current_char in [ASC_j, ASC_J]):
+            if yod_flag[0] == 0:
+                yod_flag[0] = current_char
+                return 0
+            else:
+                prev = yod_flag[0]
+                yod_flag[0] = current_char
+                current_char = prev
+        elif yod_flag[0]:
+            current_char = {ASC_j: ASC_y, ASC_J: ASC_Y}[yod_flag[0]]
+            yod_flag[0] = 0
+        if current_char in IMPORT_DICT[source_format]:
+            return IMPORT_DICT[source_format][current_char]
+        return current_char
 
     def to_pseudo(self):  # exports array as a string of pseudo characters that can be used for sorting and comparison using binary-based locales (for example in databases)
         if byteorder == "little":
@@ -325,21 +380,21 @@ class UmschString(array.array):
         return self.tobytes().decode("utf_32_be")
 
     def to_unicode(self, flags=0):  # exports array content as a Unicode-formatted string
-        copy = UmschString('L', self)
+        copy = UmschString(self)
 
         if flags & UmExport.REPLACE_I_WITH_DIAERESIS:
 
-            copy = copy.replace(UmschString('L', [PSEUDO_I_WITH_DIAERESIS]), UmschString('L', [PSEUDO_Y])).replace(
-                UmschString('L', [PSEUDO_i_WITH_DIAERESIS]), UmschString('L', [PSEUDO_y]))
+            copy = copy.replace(UmschString([PSEUDO_I_WITH_DIAERESIS]), UmschString([PSEUDO_Y])).replace(
+                UmschString([PSEUDO_i_WITH_DIAERESIS]), UmschString([PSEUDO_y]))
 
         if flags & UmExport.JJ_FOR_DOUBLE_YOD:
-            copy = copy.replace(UmschString('L', [PSEUDO_y]), UmschString('L', [ASC_j, ASC_j])).replace(UmschString('L', [PSEUDO_Y]), UmschString('L', [ASC_J, ASC_j])).replace(
-                UmschString('L', [PSEUDO_I_WITH_DIAERESIS]), UmschString('L', [ASC_J, ASC_j])).replace(UmschString('L', [PSEUDO_i_WITH_DIAERESIS]), UmschString('L', [ASC_j, ASC_j]))
+            copy = copy.replace(UmschString([PSEUDO_y]), UmschString([ASC_j, ASC_j])).replace(UmschString([PSEUDO_Y]), UmschString([ASC_J, ASC_j])).replace(
+                UmschString([PSEUDO_I_WITH_DIAERESIS]), UmschString([ASC_J, ASC_j])).replace(UmschString([PSEUDO_i_WITH_DIAERESIS]), UmschString([ASC_j, ASC_j]))
 
-        return export_string(copy, Format.UNICODE, flags)
+        return _export_string(copy, Format.UNICODE, flags)
 
     def upper(self):
-        res = UmschString('L')
+        res = UmschString()
         for char in self:
             if (cased(char)):
                 res.append(char - (char & 1))
@@ -348,7 +403,7 @@ class UmschString(array.array):
         return res
 
     def lower(self):
-        res = UmschString('L')
+        res = UmschString()
         for char in self:
             if (cased(char)):
                 res.append(char + (~char & 1))
@@ -364,21 +419,22 @@ class UmschString(array.array):
             return res
 
     def find_all(self, sub: array.array, start=None, end=None):
-        slice_tuple = slice(start, end).indices(len(self))
-        pos = slice_tuple[0]
+        NOT_FOUND = -1
+        slice_start, _, _ = slice(start, end).indices(len(self))
+        pos = slice_start
         res = []
-        while pos > -1:
+        while pos > NOT_FOUND:
             pos = self.find(sub, pos, end)
-            if pos > -1:
+            if pos > NOT_FOUND:
                 res.append(pos)
                 pos += 1
         return res
 
     def find(self, sub: array.array, start=None, end=None):
-        slice_tuple = slice(start, end).indices(len(self))
-        pos = slice_tuple[0]
+        slice_start, slice_end, _ = slice(start, end).indices(len(self))
+        pos = slice_start
         sub_length = len(sub)
-        while pos <= slice_tuple[1]-sub_length:
+        while pos <= slice_end-sub_length:
             if self[pos:pos+sub_length] == sub:
                 return pos
             pos += 1
@@ -388,7 +444,7 @@ class UmschString(array.array):
         pos = 0
         replaces = self.find_all(old)[None:count]
         old_len = len(old)
-        res = UmschString('L')
+        res = UmschString()
         for rep in replaces:
             res.extend(self[pos:rep])
             res.extend(new)
@@ -400,7 +456,7 @@ class UmschString(array.array):
         between_parentheses = False
         filtered_signs = []
         replaces = {}
-        res = UmschString('L')
+        res = UmschString()
         if flags & UmFilter.MORPH:
             filtered_signs.extend(
                 [PSEUDO_DOT, PSEUDO_COLON, PSEUDO_MIDDLE_DOT])
@@ -463,40 +519,40 @@ class UmschString(array.array):
         return False
 
 
-def cased(char):
+def cased(char: int):
     if char >= PSEUDO_CAPITAL_ALEPH and char <= PSEUDO_d_WITH_LINE and char != PSEUDO_RIGHT_HALF_RING:
         return True
     else:
         return False
 
 
-def from_pseudo(input):
-    return UmschString("L", [ord(s) for s in input])
+def from_pseudo(input: str):
+    return UmschString([ord(s) for s in input])
 
 
-def from_unicode(input):
-    return import_string(input, Format.UNICODE)
+def from_unicode(input: str):
+    return UmschString(input, Format.UNICODE)
 
 
-def from_umschrift_ttn(input):
-    return import_string(input, Format.UMSCHRIFT_TTN)
+def from_umschrift_ttn(input: str):
+    return UmschString(input, Format.UMSCHRIFT_TTN)
 
 
-def from_trlit_cg_times(input):
-    return import_string(input, Format.TRLIT_CG_TIMES)
+def from_trlit_cg_times(input: str):
+    return UmschString(input, Format.TRLIT_CG_TIMES)
 
 
-def from_trlit_cg_times_2023(input):
-    return import_string(input, Format.TRLIT_CG_TIMES_2023)
+def from_trlit_cg_times_2023(input: str):
+    return UmschString(input, Format.TRLIT_CG_TIMES_2023)
 
 
-def from_transliteration(input):
-    return import_string(input, Format.TRANSLITERATION)
+def from_transliteration(input: str):
+    return UmschString(input, Format.TRANSLITERATION)
 
 # Exports data from an Umschrift array into a string
 
 
-def export_string(input, output_format, flags=0):
+def _export_string(input: UmschString, output_format: Format, flags=0):
     if (not input):
         return str()
     res = array.array('L')
@@ -516,56 +572,3 @@ def export_string(input, output_format, flags=0):
     if byteorder == "little":
         return res.tobytes().decode("utf_32_le")
     return res.tobytes().decode("utf_32_be")
-
-
-# Imports data from a string to an Umschrift array
-
-
-def import_string(input, source_format):
-    if (not input):
-        return str()
-    i = 1
-    res = UmschString('L')
-    next_char = ord(input[0])
-    yod_flag = [0]
-    IMPORT_DICT[source_format].update(IMPORT_DICT[Format.COMMON_D])
-    while i <= len(input):
-        current_char = next_char
-        next_char = ord(input[i]) if i < (len(input)) else 0
-        converted_char = _import_char(
-            current_char, next_char, source_format, yod_flag)
-        if (converted_char):
-            res.append(converted_char)
-        i += 1
-    return res
-
-
-def _import_char(current_char, next_char, source_format, yod_flag):
-    ignored_chars = [UN_COMBINING_MACRON_BELOW, UN_COMBINING_CIRCUMFLEX_BELOW, UN_COMBINING_INVERTED_BREVE,
-                     UN_COMBINING_RIGHT_HALF_RING_ABOVE, UN_COMBINING_CYRILLIC_PSILI_PNEUMATA, UN_COMBINING_DOT_BELOW]
-    if current_char in ignored_chars:
-        return 0
-    if next_char == UN_COMBINING_MACRON_BELOW:
-        return UN_DECODE_BEFORE_COMBINING_MACRON[current_char]
-    if next_char == UN_COMBINING_CIRCUMFLEX_BELOW:
-        return UN_DECODE_BEFORE_COMBINING_CIRCUMFLEX[current_char]
-    if next_char == UN_COMBINING_INVERTED_BREVE:
-        return UN_DECODE_BEFORE_COMBINING_INVERTED_BREVE[current_char]
-    if next_char in [UN_COMBINING_RIGHT_HALF_RING_ABOVE, UN_COMBINING_CYRILLIC_PSILI_PNEUMATA]:
-        return UN_DECODE_BEFORE_COMBINING_HALF_RING_ABOVE[current_char]
-    if next_char == UN_COMBINING_DOT_BELOW:
-        return UN_DECODE_BEFORE_COMBINING_DOT_BELOW[current_char]
-    if (next_char in [ASC_j, ASC_J]) and (current_char in [ASC_j, ASC_J]):
-        if yod_flag[0] == 0:
-            yod_flag[0] = current_char
-            return 0
-        else:
-            prev = yod_flag[0]
-            yod_flag[0] = current_char
-            current_char = prev
-    elif yod_flag[0]:
-        current_char = {ASC_j: ASC_y, ASC_J: ASC_Y}[yod_flag[0]]
-        yod_flag[0] = 0
-    if current_char in IMPORT_DICT[source_format]:
-        return IMPORT_DICT[source_format][current_char]
-    return current_char
