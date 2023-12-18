@@ -143,11 +143,13 @@ def test_lcase():
     bu = from_unicode(b)
     assert au.lower() == bu
 
+
 def test_translit_output():
     a = "A1@$()Dd in sxty pn [S]&&"
     au = from_transliteration(a)
     b = au.to_transliteration()
     assert a == b
+
 
 def test_replace():
     a = r"pu̯ pi̯ pʾ pï z"
@@ -171,28 +173,35 @@ def test_mix_with_hieroglyphs():
     print(au)
     assert au.to_unicode() == a
 
+
 def test_z():
-    a0 =  from_unicode("Z")
+    a0 = from_unicode("Z")
     a = from_unicode("S", UmImport.S_FOR_Z)
     b = from_umschrift_ttn("c", UmImport.S_FOR_Z)
     c = from_trlit_cg_times("4", UmImport.S_FOR_Z)
     d = from_trlit_cg_times_2023("4", UmImport.S_FOR_Z)
     e = from_transliteration("%", UmImport.S_FOR_Z)
     assert a0 == a == b == c == d == e
+
+
 def test_export_jj():
-    a0 =  from_unicode("Imny Y")
+    a0 = from_unicode("Imny Y")
     b = a0.to_unicode()
     c = a0.to_unicode(UmExport.JJ_FOR_DOUBLE_YOD)
     assert b == "Imny Y"
-    assert c == "Imnjj Jj"    
+    assert c == "Imnjj Jj"
+
+
 def test_export_j():
-    a0 =  from_unicode("Ꞽmny Yꞽ")
+    a0 = from_unicode("Ꞽmny Yꞽ")
     b = a0.to_unicode()
     c = a0.to_unicode(UmExport.J_FOR_YOD + UmExport.JJ_FOR_DOUBLE_YOD)
     assert b == "Ꞽmny Yꞽ"
-    assert c == "Jmnjj Jjj"  
+    assert c == "Jmnjj Jjj"
+
+
 def test_export_z():
-    a0 =  from_unicode("sSzZ")
+    a0 = from_unicode("sSzZ")
     b = a0.to_unicode()
     c = a0.to_unicode(UmExport.Z_FOR_S_AND_S_FOR_S_ACUTE)
     d = a0.to_transliteration(UmExport.Z_FOR_S_AND_S_FOR_S_ACUTE)
@@ -200,13 +209,28 @@ def test_export_z():
     assert c == "śŚsS"
     assert d == "cCs%"
 
+
 def test_export_k_dot():
-    a0 =  from_unicode("qnbt Qnbt")
+    a0 = from_unicode("qnbt Qnbt")
     b = a0.to_unicode()
     c = a0.to_unicode(UmExport.K_WITH_DOT)
     d = a0.to_transliteration(UmExport.K_WITH_DOT)
     e = a0.to_transliteration(UmExport.Z_FOR_S_AND_S_FOR_S_ACUTE)
     assert b == "qnbt Qnbt"
-    assert c == "ḳnbt Ḳnbt" 
-    assert d == "qnbt Qnbt"     
-    assert e == "onbt Onbt"         
+    assert c == "ḳnbt Ḳnbt"
+    assert d == "qnbt Qnbt"
+    assert e == "onbt Onbt"
+
+
+def test_export_diaeresis():
+    #
+    a0 = from_unicode("ꞽmï ꞼMÏ")
+    b = a0.to_unicode()
+    c = a0.to_unicode(UmExport.REPLACE_I_WITH_DIAERESIS)
+    d = a0.to_unicode(UmExport.REPLACE_I_WITH_DIAERESIS +
+                      UmExport.J_FOR_YOD + UmExport.JJ_FOR_DOUBLE_YOD)
+    e = a0.to_unicode(UmExport.J_FOR_YOD)
+    assert b == "ꞽmï ꞼMÏ"
+    assert c == "ꞽmy ꞼMY"
+    assert d == "jmjj JMJj"
+    assert e == "jmï JMÏ"
