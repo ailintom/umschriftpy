@@ -22,6 +22,7 @@ To create an `UmschString` object you can use one of the following methods:
 - `from_trlit_cg_times_2023` loads strings formatted with the 2023 version of the Trlit_CG Times font (https://dmd.wepwawet.nl/fonts.htm https://oeb.griffith.ox.ac.uk/fonts.aspx)
 - `from_trlit_cg_times` loads strings formatted with the pre-2023 version of the Trlit_CG Times font
 - `from_transliteration` loads strings formatted with Transliteration font (CCER), downloadable from the link above
+All of these methods can be modified using the optional `UmImport.S_FOR_Z` flag, which imports s and S as z and Z.
 
 The `UmschString` objects have export methods for outputting strings and support some of the Python string methods (`upper`, `lower`, `index`, `find`, `replace`, `endswith`, `startswith`)
 Data can be cleaned up using the `filter` method, with filtering options set by flags:
@@ -41,14 +42,16 @@ Data can be cleaned up using the `filter` method, with filtering options set by 
 `UmFilter.LOWER` converts all transliteration/transcription to lower case
 `UmFilter.HYPHENS` replaces all hyphens with spaces
 
-Data can be output to string using the `to_unicode` method. By default this method uses the Leiden Unified Transliteration/Transcription, but deviations  can be set up by optional flags: 
+Data can be normally to string using the `to_unicode`  method. By default this method uses the Leiden Unified Transliteration/Transcription, but deviations  can be set up by optional flags: 
 `UmExport.K_WITH_DOT` uses ḳ and Ḳ for q and Q
 `UmExport.J_FOR_YOD`  uses j and J for ꞽ and Ꞽ
 `UmExport.JJ_FOR_DOUBLE_YOD`  uses jj and Jj for y and Y as well as for ï and Ï
 `UmExport.REPLACE_I_WITH_DIAERESIS`  uses y and Y for ï and Ï
+`UmExport.Z_FOR_S_AND_S_FOR_S_ACUTE` uses s / S for z / Z and ś / Ś for s / S (Wörterbuch-style transliteration/transcription)
 Flags can be combined using the bitwise OR `|` operator
 
 Besides, data can be output using the `to_pseudo` method. It produces pseudo-coded Unicode strings, which can be stored, for example, in a database TEXT field and used for (case-sensitive) binary-based sorting and string comparison of the original transliteration/transcription strings (tested with SQLite and MariaDB/MySQL). Pseudo-coded Unicode strings can be loaded into `UmschString` objects using the additional `from_pseudo` method. For an example, see the `test_pseudo()` method in `test_pytest.py`.
+Alternatively, the `to_transliteration` exports data to ASCII-codes, which are correctly displayed using the Transliteration font (CCER).
 
 ## Examples: 
 ```python
